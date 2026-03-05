@@ -836,26 +836,26 @@ Accumulation is not guaranteed to help. A summarizing or lossy observer may comp
 \centering
 \begin{tikzpicture}[x=1cm,y=1cm]
   % Universe of task-relevant pairs
-  \draw[thick] (0,0) rectangle (11,6);
-  \node[anchor=west] at (0.2,5.7) {\(\Delta_{\mathcal Q}\) (task-relevant pairs)};
+  \draw[thick] (0,0) rectangle (13.8,6.5);
+  \node[anchor=west] at (0.2,6.2) {\(\Delta_{\mathcal Q}\) (task-relevant pairs)};
 
   % Projection-separated set
-  \draw[thick] (3.9,3.0) circle (2.1);
-  \node at (3.9,5.2) {\(\mathcal S_{\proj}\)};
-  \node[align=center] at (3.9,1.15) {\scriptsize separated at\\[-1pt]\scriptsize projection};
+  \draw[thick] (3.6,3.2) circle (2.2);
+  \node at (3.6,4.9) {\(\mathcal S_{\proj}\)};
+  \node[align=center] at (3.6,1.5) {\scriptsize separated at\\[-1pt]\scriptsize projection};
 
   % Basis-separated subset
-  \draw[thick,dashed] (3.6,2.8) circle (1.15);
-  \node at (3.6,2.8) {\(\mathcal S_{\basis}\)};
+  \draw[thick,dashed] (3.3,3.4) circle (1.2);
+  \node at (3.3,3.4) {\(\mathcal S_{\basis}\)};
 
   % Accumulation-separated set
-  \draw[thick] (7.4,2.9) circle (2.25);
-  \node at (7.4,5.35) {\(\mathcal S_{\acc}\)};
-  \node[align=center] at (7.4,0.95) {\scriptsize separated after\\[-1pt]\scriptsize accumulation};
+  \draw[thick] (7.8,3.2) circle (2.3);
+  \node at (7.8,4.9) {\(\mathcal S_{\acc}\)};
+  \node[align=center] at (7.8,1.5) {\scriptsize separated after\\[-1pt]\scriptsize accumulation};
 
   % Region note: recovered by accumulation
-  \draw[->,thick] (9.75,3.2) -- (8.85,3.2);
-  \node[anchor=west,align=left] at (9.8,3.2) {\scriptsize accumulation-only\\[-1pt]\scriptsize separations};
+  \draw[->,thick] (10.8,3.2) -- (9.5,3.2);
+  \node[anchor=west,align=left] at (10.8,3.2) {\scriptsize accumulation-only\\[-1pt]\scriptsize separations};
 \end{tikzpicture}
 \caption{Schematic aperture-recovery regime inside \(\Delta_{\mathcal Q}\). The basis-separated set \(\mathcal S_{\basis}\) is contained in the projection-separated set \(\mathcal S_{\proj}\), while \(\mathcal S_{\acc}\) can include separations that become available only after accumulation. The figure is illustrative; OG-I does not assume a universal inclusion relation between \(\mathcal S_{\proj}\) and \(\mathcal S_{\acc}\).}
 \label{fig:aperture-recovery-sets}
@@ -935,22 +935,26 @@ Aperture is not identical to task sufficiency, but in finite settings the connec
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[node distance=0.85cm and 0.8cm]
+\begin{tikzpicture}[node distance=1cm and 0.8cm]
+  % Top row
   \node[ogbox, minimum width=2.4cm] (h) {history\\prefix chain};
   \node[ogbox, right=of h, minimum width=2.4cm] (x) {raw traces\\\(x_i = O(p_i)\)};
   \node[ogbox, right=of x, minimum width=2.55cm] (m) {state update\\\(m_{i+1}=K_S(m_i,x_i)\)};
   \node[ogbox, right=of m, minimum width=2.6cm] (a) {accumulated output\\\(\widehat{O}_S(h)=E_S(m_{n+1})\)};
-  \node[ogaltbox, below=1.0cm of a, minimum width=2.7cm] (d) {task decoder\\\(D':\widehat{\Tr}_S\to\mathcal Y_{\mathcal Q}\)};
-  \node[ogaltbox, left=1.2cm of d, minimum width=2.8cm] (t) {truth functional\\\(T_{\mathcal Q}(h)\)};
 
+  % Bottom row (aligned with ends of the top row to span the diagram)
+  \node[ogaltbox, below=1.5cm of h, minimum width=2.8cm] (t) {truth functional\\\(T_{\mathcal Q}(h)\)};
+  \node[ogaltbox, below=1.5cm of a, minimum width=2.7cm] (d) {task decoder\\\(D':\widehat{\Tr}_S\to\mathcal Y_{\mathcal Q}\)};
+
+  % Connections
   \draw[ogline] (h) -- (x);
   \draw[ogline] (x) -- (m);
   \draw[ogline] (m) -- (a);
   \draw[ogline] (a) -- (d);
-  \draw[ogthin] (h.south) |- (t.north);
-  \draw[ogthin] (t.east) -- (d.west);
+  \draw[ogthin] (h) -- (t);
 
-  \node[align=center] at (6.1,-1.75) {\scriptsize finite-\(X\) regime: \(A^{\acc}_{\mathcal Q,\mu}=1\)\\[-1pt]\scriptsize corresponds to exact decodability on \(X\)};
+  % Midway text placement guarantees no overlaps
+  \draw[ogthin] (t) -- node[midway, above, align=center] {\scriptsize finite-\(X\) regime: \(A^{\acc}_{\mathcal Q,\mu}=1\)\\[-1pt]\scriptsize corresponds to exact decodability on \(X\)} (d);
 \end{tikzpicture}
 \caption{Accumulation-to-task flow. Prefix-level observations are integrated by \(K_S\), emitted as \(\widehat{O}_S\), and decoded against task truth. This flow underlies the finite equivalence between perfect accumulated aperture and exact task decoding in Proposition~\ref{prop:perfect-acc-aperture-finite}.}
 \label{fig:accumulation-task-flow}
