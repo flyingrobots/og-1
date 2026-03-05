@@ -25,14 +25,14 @@ with finite checkable witnesses.
 
 - `pdflatex`
 - `biber`
-- `pdftotext` (only required for `make txt`)
+- `pandoc` (only required for `make txt`)
 
 ### Commands
 
 ```bash
 make       # same as: make pdf
 make pdf   # build PDF to dist/observer_geometry_1.pdf (via .build/)
-make txt   # extract text to dist/observer_geometry_1.txt with figure placeholders
+make txt   # derive text from LaTeX source to dist/observer_geometry_1.txt with figure placeholders
 make clean # remove .build/ and dist/
 ```
 
