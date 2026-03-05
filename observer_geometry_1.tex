@@ -87,8 +87,6 @@
 }
 
 \pagestyle{ogmain}
-% Start each major section on a new page.
-\pretocmd{\section}{\clearpage}{}{}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -100,6 +98,7 @@
 
 \newcommand{\Hist}{\mathbf{Hist}}
 \newcommand{\Tr}{\mathbf{Tr}}
+\newcommand{\Enc}{\mathrm{Enc}}
 \newcommand{\proj}{\mathrm{proj}}
 \newcommand{\basis}{\mathrm{basis}}
 \newcommand{\acc}{\mathrm{acc}}
@@ -113,7 +112,7 @@
 \newcommand{\TaskBundle}{\mathbb{T}}
 \newcommand{\AION}{AI\ensuremath{\Omega}N}
 \newcommand{\paperkeywords}{observer geometry; rulial distance; projection; basis; accumulation; observer signatures; degeneracy; structural insufficiency; bias gap}
-\newcommand{\paperabstract}{Observers can agree on terminal state while disagreeing on conflict history, intent preservation, or replayability. These cases show that scalar comparison alone is insufficient for observer analysis. This paper inaugurates the Observer Geometry Series (OG-I), derived from the \AION\ Foundation Series (WARP~I--V), where budgeted observer geometry was introduced in WARP~IV. Translation cost remains essential but incomplete: observers may be state-close yet provenance-far, extensionally aligned yet conflict-structurally distinct, or equivalent at unbounded resources while sharply separated at finite budgets. We therefore model an observer as a projection equipped with a native basis and, when relevant, an accumulation process over prefixes. On this foundation, we define aperture, degeneracy, task-conditioned degeneracy, structural insufficiency floors, bias gaps, multi-component observer signatures, and budget elasticity. We prove coarsening monotonicity results and separation theorems showing that observer dominance does not admit exact scalar collapse in general, and we provide finite witness constructions for state/provenance separation, task sufficiency without historical faithfulness, and accumulation-level separation under equal projection and basis. The resulting framework extends observer geometry from translation cost alone to a calculus of visibility, ambiguity, recoverability, and task-relative correctness.}
+\newcommand{\paperabstract}{Observers can agree on terminal state while disagreeing on conflict history, intent preservation, or replayability. These cases show that scalar comparison alone is insufficient for observer analysis. This paper inaugurates the Observer Geometry Series (OG-I), derived from the \AION\ Foundation Series (WARP~I--V), where budgeted observer geometry was introduced in WARP~IV. Translation cost remains essential but incomplete: observers may be state-close yet provenance-far, extensionally aligned yet conflict-structurally distinct, or equivalent at unbounded resources while sharply separated at finite budgets. We therefore model an observer as a projection equipped with a native basis and, when relevant, an accumulation process over prefixes. On this foundation, we define aperture, degeneracy, task-conditioned degeneracy, structural insufficiency floors, bias gaps, multi-component observer signatures, and a scoped budget-elasticity diagnostic. We prove coarsening monotonicity results and separation theorems showing that observer dominance does not admit exact scalar collapse in general, and we provide finite witness constructions for state/provenance separation, task sufficiency without historical faithfulness, and accumulation-level separation under equal projection and basis. The resulting framework extends observer geometry from translation cost alone to a calculus of visibility, ambiguity, recoverability, and task-relative correctness.}
 \DeclareMathOperator{\BiasGap}{BiasGap}
 \DeclareMathOperator{\Dist}{Dist}
 \DeclareMathOperator{\Mor}{Mor}
@@ -144,7 +143,7 @@
 {\Large\bfseries Projection, Basis, Accumulation, and Observer Signatures\par}
 \vspace{0.18em}
 {\normalsize \paperdoi\\[-0.22em]}
-{\normalsize \paperversion\quad \publicationdate\par}
+{\normalsize \paperversion\enspace|\enspace\publicationdate\par}
 \vspace{0.48em}
 {\large James Ross\\[-0.14em]}
 {\normalsize Independent Researcher\\[-0.14em]}
@@ -199,10 +198,10 @@ We make three contributions:
 The quantities introduced here are not claimed uniquely canonical. The epistemic layer is intentionally minimal; full noisy/adversarial/social observer theory is deferred.
 
 \paragraph{Roadmap.}
-We organize the paper as follows. Section~\ref{sec:tldr} provides prerequisite context for readers who have not recently worked through WARP~I--V. Section~\ref{sec:background} restates the formal setup and introduces the structural observer layer (projection, basis, accumulation). Sections~\ref{sec:aperture} and~\ref{sec:degeneracy} develop the core structural coordinates. Section~\ref{sec:signatures-elasticity} introduces signatures and budget elasticity. Section~\ref{sec:epistemic-layer} introduces the task-relative epistemic layer (truth functionals, insufficiency floor, bias gap). Section~\ref{sec:separation} establishes non-collapse results, and Section~\ref{sec:examples} provides finite witnesses. Section~\ref{sec:related-work}, placed near the end to preserve mathematical continuity, positions the framework with respect to adjacent literatures.
+We organize the paper as follows. Section~\ref{sec:tldr} provides prerequisite context for readers who have not recently worked through WARP~I--V. Section~\ref{sec:background} restates the formal setup and introduces the structural observer layer (projection, basis, accumulation). Sections~\ref{sec:aperture} and~\ref{sec:degeneracy} develop the core structural coordinates. Section~\ref{sec:signatures-elasticity} introduces signatures and a scoped budget-elasticity diagnostic. Section~\ref{sec:epistemic-layer} introduces the task-relative epistemic layer (truth functionals, insufficiency floor, bias gap). Section~\ref{sec:separation} establishes non-collapse results, and Section~\ref{sec:examples} provides finite witnesses. Section~\ref{sec:related-work}, placed near the end to preserve mathematical continuity, positions the framework with respect to adjacent literatures.
 
 \paragraph{Self-contained scope.}
-We write this paper as a self-contained technical artifact relative to the standing assumptions in Section~\ref{sec:background} (deterministic replayable histories and WARP observer/translator semantics). Prior installments provide historical context, but all additional primitives and core claims used here are defined and proved within this document. The budgeted translator metric \(D_{\tau,m}\) and its construction are imported from WARP~IV and used here through their stated properties.
+We write this paper as a self-contained technical artifact relative to the standing assumptions in Section~\ref{sec:background}: deterministic replayable histories and the imported WARP~IV distance interface \(D_{\tau,m}\). Given those assumptions, every OG-I primitive, coordinate, and theorem can be evaluated directly from this document without consulting prior series proofs. Prior installments provide historical context and the source construction of \(D_{\tau,m}\), but OG-I uses that metric only through its stated interface properties.
 
 \section{Preparatory Overview}
 \label{sec:tldr}
@@ -305,7 +304,7 @@ where \(O\) is projection, \(\mathcal{B}_S\) is native basis, and \((M_S,K_S,E_S
 We assume the deterministic history framework of WARP~III--V~\cite{ross_paper_iii,ross_paper_iv,ross_paper_v}: replayable boundary encodings \((U_0,P)\), resource-bounded observer translation geometry \(D_{\tau,m}\), and coarse-graining effects on visible dynamics. OG-I keeps that setting and adds the structure needed to model what observers preserve, collapse, and reconstruct beyond translation cost alone.
 
 \paragraph{Reading note.}
-Notation is intentionally layered. For a first pass, Section~\ref{subsec:quick-symbol-primer} separates observer-intrinsic maps (\(O,\widehat{O}_S,B_S\)) from task/distribution-relative coordinates (\(\mathsf{Ap},\mathsf{Deg},\epsilon_{\mathrm{opt}},\BiasGap\)); keeping that subsection in view reduces cognitive load in Sections~\ref{sec:aperture}--\ref{sec:separation}.
+Notation is intentionally layered. For a first pass, Section~\ref{subsec:quick-symbol-primer} separates observer-intrinsic maps (\(O,\widehat{O}_S,\Enc_S\)) from task/distribution-relative coordinates (\(\mathsf{Ap},\mathsf{Deg},\epsilon_{\mathrm{opt}},\BiasGap\)); keeping that subsection in view reduces cognitive load in Sections~\ref{sec:aperture}--\ref{sec:separation}.
 
 \subsection{Deterministic histories, observers, and translators}
 \label{subsec:histories-observers}
@@ -394,7 +393,7 @@ Definition~\ref{def:structural-observer} isolates the three primitives announced
 \begin{tikzpicture}[node distance=0.85cm and 0.8cm]
   \node[ogbox, minimum width=2.0cm, minimum height=0.95cm] (hist) {history\\\(h\)};
   \node[ogbox, right=of hist, minimum width=2.05cm] (proj) {projection\\\(O(h)\)};
-  \node[ogbox, right=of proj, minimum width=2.2cm] (basis) {basis view\\\(B_S(O(h))\)};
+  \node[ogbox, right=of proj, minimum width=2.2cm] (basis) {basis view\\\(\Enc_S(O(h))\)};
   \node[ogbox, right=of basis, minimum width=2.2cm] (mem) {accumulation\\\((M_S,K_S)\)};
   \node[ogbox, right=of mem, minimum width=2.45cm] (emit) {structural output\\\(\widehat{O}_S(h)\)};
 
@@ -754,7 +753,7 @@ Hence the event counted by \(A^{\basis}_{\mathcal{Q},\mu}(S)\) is a subset of th
 
 \begin{remark}[Basis completeness (injective encoding)]
 \label{rem:basis-completeness}
-If the basis encoding map \(B_S\) (Definition~\ref{def:basis-encoding-map}) is injective on \(\Tr_S\), then equality of basis encodings implies equality of raw traces. In that case, the inclusion in Proposition~\ref{prop:basis-bounded-by-projection} is an equality. In general, however, basis aperture is the more meaningful invariant: it measures what the observer can express \emph{natively}, not merely what is latent in an uninterpreted raw trace.
+If the basis encoding map \(\Enc_S\) (Definition~\ref{def:basis-encoding-map}) is injective on \(\Tr_S\), then equality of basis encodings implies equality of raw traces. In that case, the inclusion in Proposition~\ref{prop:basis-bounded-by-projection} is an equality. In general, however, basis aperture is the more meaningful invariant: it measures what the observer can express \emph{natively}, not merely what is latent in an uninterpreted raw trace.
 \end{remark}
 
 \subsection{Coarsening and monotonicity}
@@ -1068,15 +1067,15 @@ Let
 \]
 be a structural observer. Its \emph{basis encoding map} is
 \[
-  B_S : \Tr_S \to \prod_{b\in\mathcal{B}_S}\cod(b),
+  \Enc_S : \Tr_S \to \prod_{b\in\mathcal{B}_S}\cod(b),
   \qquad
-  B_S(t) := (\,b(t)\,)_{b\in\mathcal{B}_S}.
+  \Enc_S(t) := (\,b(t)\,)_{b\in\mathcal{B}_S}.
 \]
 \end{definition}
 
 \begin{remark}
 \label{rem:basis-encoding}
-The map \(B_S\) packages all native basis observables into a single observable. Two raw traces have the same basis encoding exactly when they are indistinguishable in the observer's native coordinates.
+The map \(\Enc_S\) packages all native basis observables into a single observable. Two raw traces have the same basis encoding exactly when they are indistinguishable in the observer's native coordinates.
 \end{remark}
 
 \subsection{Degeneracy at the projection, basis, and accumulation layers}
@@ -1093,7 +1092,7 @@ Let \(H\) be a random history with law \(\nu\). For a structural observer
 define the associated random variables
 \[
   X_S^{\proj} := O(H),\qquad
-  X_S^{\basis} := B_S(O(H)),\qquad
+  X_S^{\basis} := \Enc_S(O(H)),\qquad
   X_S^{\acc} := \widehat{O}_S(H).
 \]
 \end{definition}
@@ -1184,7 +1183,7 @@ Moreover,
 \begin{proof}
 The range bounds are the standard range bounds for conditional entropy. For the inequality, \(X_S^{\basis} = f(X_S^{\proj})\) where
 \[
-  f := B_S.
+  f := \Enc_S.
 \]
 Since conditioning on a function of a random variable cannot reduce ambiguity below conditioning on the original variable, one has
 \[
@@ -1385,6 +1384,34 @@ Thus the \(S_2\) observables are functions of the \(S_1\) observables. Condition
 
 The previous sections define aperture and degeneracy coordinates. These are more informative than a single observer distance, but they do not capture the full semantic structure relevant to comparison. Applications may prioritize distinct axes, including state equality, provenance retention, conflict visibility, temporal truth, and intent preservation. This section introduces \emph{observer signatures} as structured tuples of semantically typed coordinates, together with \emph{budget elasticity}, treated here in a scoped form aligned with WARP~IV.
 
+\subsection{Epistemic Coordinates Used in Signatures (Preview)}
+\label{subsec:signature-epistemic-preview}
+
+To keep the exposition readable, signatures in this section use one coordinate from the structural core and one coordinate whose full admissibility setup is completed in Section~\ref{sec:epistemic-layer}.
+
+The task-conditioned degeneracy coordinate is already defined in Section~\ref{subsec:task-conditioned-degeneracy}:
+\[
+  \mathsf{Deg}^{\task}_{\nu,\mathcal{Q}}(S)
+  =
+  H_\nu\!\bigl(T_{\mathcal{Q}}(H)\mid X_S^{\acc}\bigr).
+\]
+
+For insufficiency, fix the loss-bundle components \((\nu_{\mathcal{Q}},\ell_{\mathcal{Q}})\) for each task family \(\mathcal{Q}\), and preview the coordinate by
+\[
+  \epsilon_{\mathrm{opt}}(S,\mathcal{Q})
+  :=
+  \inf_{D':\,\widehat{\Tr}_S\to\mathcal{Y}_{\mathcal{Q}}}
+  \mathbb{E}_{h\sim \nu_{\mathcal{Q}}}
+  \!\Bigl[
+    \ell_{\mathcal{Q}}
+    \bigl(
+      T_{\mathcal{Q}}(h),\,
+      D'(\widehat{O}_S(h))
+    \bigr)
+  \Bigr].
+\]
+Section~\ref{sec:epistemic-layer} then gives the full OG-I definition of admissible decoders, loss-model scope, and its relation to epistemic observers.
+
 \subsection{Single-observer signatures}
 \label{subsec:single-observer-signatures}
 
@@ -1428,7 +1455,7 @@ The \emph{single-observer signature} of \(S\) relative to \((\nu,\TaskBundle,\mu
 
 \begin{remark}[Readability and ordering]
 \label{rem:signature-epistemic-forward-ref}
-The signature tuple already includes task-conditioned and insufficiency coordinates. Their full epistemic formalization is intentionally deferred to Section~\ref{sec:epistemic-layer} so that readers can first absorb the structural and signature-level geometry.
+The signature tuple includes task-conditioned and insufficiency coordinates. Section~\ref{subsec:signature-epistemic-preview} gives the compact preview used here; the full epistemic formalization is intentionally deferred to Section~\ref{sec:epistemic-layer} so that readers can first absorb the structural and signature-level geometry.
 \end{remark}
 
 \begin{remark}[Suppressed loss-model dependence]
@@ -1702,7 +1729,7 @@ Observers matter relative to questions; aperture, degeneracy, and insufficiency 
 
 \begin{remark}[Observer-intrinsic structure vs. relative coordinates]
 \label{rem:intrinsic-vs-relative}
-In OG-I, the structural observer tuple \(S=(O,\mathcal{B}_S,M_S,K_S,E_S)\) and the induced maps \(O,\widehat{O}_S,B_S\) are observer-intrinsic objects. Most comparison quantities are relative coordinates: aperture depends on \((\mathcal{Q},\mu_{\mathcal{Q}})\), degeneracy depends on \(\nu\), insufficiency and bias depend on \((\mathcal{Q},\nu_{\mathcal{Q}},\ell_{\mathcal{Q}})\), and typed pairwise distances depend on chosen semantic comparison views and budgets \((\tau,m)\).
+In OG-I, the structural observer tuple \(S=(O,\mathcal{B}_S,M_S,K_S,E_S)\) and the induced maps \(O,\widehat{O}_S,\Enc_S\) are observer-intrinsic objects. Most comparison quantities are relative coordinates: aperture depends on \((\mathcal{Q},\mu_{\mathcal{Q}})\), degeneracy depends on \(\nu\), insufficiency and bias depend on \((\mathcal{Q},\nu_{\mathcal{Q}},\ell_{\mathcal{Q}})\), and typed pairwise distances depend on chosen semantic comparison views and budgets \((\tau,m)\).
 \end{remark}
 
 \subsection{Task families and epistemic observers}
@@ -2063,6 +2090,7 @@ Both conclusions contradict incomparability. Therefore no exact scalarization ex
 \begin{remark}[What the theorem does and does not say]
 \label{rem:no-exact-scalarization-remark}
 Theorem~\ref{thm:no-exact-scalarization} does not forbid scalar summaries. It forbids only the expectation that one scalar can \emph{exactly} replace coordinatewise observer signatures. Any scalar summary imposes a total ranking, whereas observer dominance is naturally partial. This motivates retaining vector signatures whenever exact dominance information matters.
+Equivalently: any single-score ranking that is used as an exact replacement must fabricate at least one dominance claim that is not present in the underlying observer geometry.
 \end{remark}
 
 \begin{remark}[Operational use when teams still need one score]
@@ -2907,7 +2935,7 @@ Barbour's timeless relational perspective emphasizes configuration-space structu
 The state-vs-provenance separation theorems are related in spirit to observational-equivalence concerns in process semantics~\cite{milner1989communication} and to causal-vs-extensional distinctions familiar in causal modeling~\cite{pearl2009causality}. OG-I's claim is not that these literatures are interchangeable, but that a common observer-geometric language can make their comparison points explicit in systems settings where replayability, explainability, and task-correctness interact.
 
 \paragraph{Positioning claim.}
-Taken together, these connections situate OG-I at the interface of observer translation geometry, distributed consistency mechanisms, and task-relative information adequacy. OG-I's claim is modest: projection, basis, accumulation, degeneracy, insufficiency, bias, and elasticity can be analyzed within one shared coordinate framework. OG-I does not claim this coordinate set is uniquely complete.
+Taken together, these connections situate OG-I at the interface of observer translation geometry, distributed consistency mechanisms, and task-relative information adequacy. OG-I's claim is modest: projection, basis, accumulation, degeneracy, insufficiency, bias, and a scoped elasticity diagnostic can be analyzed within one shared coordinate framework. OG-I does not claim this coordinate set is uniquely complete.
 
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
@@ -2918,7 +2946,7 @@ WARP~IV gave a budgeted geometry of observer translation cost~\cite{ross_paper_i
 \]
 Projection captures what is seen, basis captures what is natively expressible, and accumulation captures what can be built over time. With a fixed truth task and loss model, we then separate unavoidable error from avoidable error.
 
-This yields a coordinate set beyond scalar distance: aperture, degeneracy, structural insufficiency \(\epsilon_{\mathrm{opt}}\), bias gap \(\BiasGap\), semantically typed pairwise coordinates, and budget elasticity. The separation theorems establish joint necessity of these coordinates: state and provenance can separate, task sufficiency can separate from historical faithfulness, and accumulation can separate from projection and basis. The finite witnesses provide explicit constructions of these regimes.
+This yields a coordinate set beyond scalar distance: aperture, degeneracy, structural insufficiency \(\epsilon_{\mathrm{opt}}\), bias gap \(\BiasGap\), semantically typed pairwise coordinates, and a scoped budget-elasticity diagnostic. The separation theorems establish joint necessity of the core structural/epistemic coordinates (aperture, degeneracy, insufficiency, and signatures): state and provenance can separate, task sufficiency can separate from historical faithfulness, and accumulation can separate from projection and basis. The finite witnesses provide explicit constructions of these regimes, including an explicit elasticity witness for the scoped diagnostic.
 
 \subsection{Principal Implications}
 \label{subsec:what-has-been-gained}
