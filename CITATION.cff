@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as follows."
+title: "Observer Geometry I: Beyond Distance"
+version: "1.0.0"
+doi: "10.5281/zenodo.18868896"
+date-released: "2026-03-05"
+license: "CC-BY-4.0"
+authors:
+  - family-names: "Ross"
+    given-names: "James"
+    orcid: "https://orcid.org/0009-0006-0025-7801"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Ross"
+      given-names: "James"
+      orcid: "https://orcid.org/0009-0006-0025-7801"
+  title: "Observer Geometry I: Beyond Distance - Projection, Basis, Accumulation, and Observer Signatures"
+  version: "1.0.0"
+  doi: "10.5281/zenodo.18868896"
+  publisher: "Zenodo"
+  year: 2026

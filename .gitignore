@@ -1,0 +1,52 @@
+.build/
+
+# Legacy / alternate build dirs
+build/
+dist/
+
+# macOS filesystem metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+Icon?
+
+# Editor / swap noise
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# LaTeX aux/build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# BibTeX/Biber temp files
+*-blx.bib
+
+# Minted/Pygments cache dirs
+_minted*
+
+# Generated outputs from this repo's Make targets live in dist/

@@ -1,0 +1,57 @@
+{
+  "title": "Observer Geometry I: Beyond Distance - Projection, Basis, Accumulation, and Observer Signatures",
+  "doi": "10.5281/zenodo.18868896",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "publication_date": "2026-03-05",
+  "version": "1.0.0",
+  "description": "Observer Geometry I formalizes observer comparison beyond single-scalar distance. The paper separates projection, basis, and accumulation to characterize replayability, conflict visibility, and task reliability under resource limits. It distinguishes structural information loss from decoder-induced error and provides finite, checkable witnesses for core separation results, with direct relevance to distributed and provenance-aware systems.",
+  "creators": [
+    {
+      "name": "Ross, James",
+      "affiliation": "Independent Researcher",
+      "orcid": "0009-0006-0025-7801"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "language": "eng",
+  "keywords": [
+    "observer geometry",
+    "rulial distance",
+    "projection",
+    "basis",
+    "accumulation",
+    "observer signatures",
+    "degeneracy",
+    "structural insufficiency",
+    "bias gap"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.17908005",
+      "relation": "references",
+      "resource_type": "publication"
+    },
+    {
+      "identifier": "10.5281/zenodo.17934512",
+      "relation": "references",
+      "resource_type": "publication"
+    },
+    {
+      "identifier": "10.5281/zenodo.17963669",
+      "relation": "references",
+      "resource_type": "publication"
+    },
+    {
+      "identifier": "10.5281/zenodo.18038297",
+      "relation": "references",
+      "resource_type": "publication"
+    },
+    {
+      "identifier": "10.5281/zenodo.18146884",
+      "relation": "references",
+      "resource_type": "publication"
+    }
+  ]
+}
