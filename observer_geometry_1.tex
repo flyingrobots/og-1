@@ -304,6 +304,9 @@ where \(O\) is projection, \(\mathcal{B}_S\) is native basis, and \((M_S,K_S,E_S
 
 We assume the deterministic history framework of WARP~III--V~\cite{ross_paper_iii,ross_paper_iv,ross_paper_v}: replayable boundary encodings \((U_0,P)\), resource-bounded observer translation geometry \(D_{\tau,m}\), and coarse-graining effects on visible dynamics. OG-I keeps that setting and adds the structure needed to model what observers preserve, collapse, and reconstruct beyond translation cost alone.
 
+\paragraph{Reading note.}
+Notation is intentionally layered. For a first pass, Section~\ref{subsec:quick-symbol-primer} separates observer-intrinsic maps (\(O,\widehat{O}_S,B_S\)) from task/distribution-relative coordinates (\(\mathsf{Ap},\mathsf{Deg},\epsilon_{\mathrm{opt}},\BiasGap\)); keeping that subsection in view reduces cognitive load in Sections~\ref{sec:aperture}--\ref{sec:separation}.
+
 \subsection{Deterministic histories, observers, and translators}
 \label{subsec:histories-observers}
 
@@ -381,7 +384,7 @@ consisting of:
 
 \begin{remark}[Projection, basis, accumulation]
 \label{rem:projection-basis-accumulation}
-Definition~\ref{def:structural-observer} isolates the three primitives announced in the introduction. The functor \(O\) is the \emph{projection} layer. The family \(\mathcal{B}_S\) is the observer's native \emph{basis} of distinctions. The pair \((M_S,K_S)\) is the \emph{accumulation} layer, allowing observational information to build over time rather than being treated as a memoryless one-shot map. The emission map \(E_S\) records what structural description is externally available after accumulation. WARP~IV observers are recovered as the special case in which the observer is effectively memoryless and \(\widehat{\Tr}_S \cong \Tr_S\).
+Definition~\ref{def:structural-observer} isolates the three primitives announced in the introduction. The functor \(O\) is the \emph{projection} layer. The family \(\mathcal{B}_S\) is the observer's native \emph{basis} of distinctions. The pair \((M_S,K_S)\) is the \emph{accumulation} layer, allowing observational information to build over time rather than being treated as a memoryless one-shot map. The emission map \(E_S\) records what structural description is externally available after accumulation. WARP~IV observers are recovered as the special case in which the observer is effectively memoryless and \(\widehat{\Tr}_S \cong \Tr_S\). A terminal state-only observer is memoryless in this sense; a provenance logger that retains conflict markers or first-seen events is accumulative.
 \end{remark}
 
 \noindent Figure~\ref{fig:observer-stack} summarizes the paper's architectural split. The structural layer is the observer itself: projection, native basis, and accumulation. The epistemic layer begins only when a truth task and a decoder are added.
@@ -481,7 +484,7 @@ Figure~\ref{fig:invariant-map} provides a compact map of the paper's core coordi
 \label{fig:invariant-map}
 \end{figure}
 
-\subsection{Quick Symbol Primer}
+\subsection{Quick Symbol Primer (Intrinsic vs.\ Relative)}
 \label{subsec:quick-symbol-primer}
 
 Before the formal development, we isolate the minimum symbol set used repeatedly:
@@ -2058,6 +2061,11 @@ Both conclusions contradict incomparability. Therefore no exact scalarization ex
 Theorem~\ref{thm:no-exact-scalarization} does not forbid scalar summaries. It forbids only the expectation that one scalar can \emph{exactly} replace coordinatewise observer signatures. Any scalar summary imposes a total ranking, whereas observer dominance is naturally partial. This motivates retaining vector signatures whenever exact dominance information matters.
 \end{remark}
 
+\begin{remark}[Operational use when teams still need one score]
+\label{rem:scalarization-operational-use}
+In practice, teams may still publish a single dashboard score, but it should be treated as a policy summary layered \emph{after} coordinatewise analysis. A robust workflow is: (i) compare observers with the partial order \( \trianglerighteq \) of Definition~\ref{def:signature-dominance}; (ii) keep only Pareto-undominated candidates; (iii) apply deployment-specific tie-breakers (weights, constraints, risk budgets) within that reduced set. This preserves real incomparabilities while still supporting concrete decisions.
+\end{remark}
+
 \subsection{State--provenance separation}
 \label{subsec:state-provenance-separation}
 
@@ -2928,7 +2936,7 @@ This paper is self-contained relative to the standing assumptions in Section~\re
 
 \begin{enumerate}[leftmargin=*]
   \item \textbf{Signature scope.} \(\Sigma^{\mathrm{single}}\) and \(\Sigma^{\mathrm{pair}}\) are useful coordinate families, not uniquely canonical endpoints.
-  \item \textbf{Forgetting models.} OG-I treats monotone accumulation in detail and includes finite overwrite/erasure witnesses, but does not yet develop a general theory for practical forgetting policies (sliding windows, decay, LRU, attention-style retention, strategic deletion).
+  \item \textbf{Forgetting models.} OG-I treats monotone accumulation in detail and includes finite overwrite/erasure witnesses, but does not yet develop a general theory for practical forgetting policies (sliding windows, decay, LRU, attention-style retention, strategic deletion). For example, a fixed-width sliding window can reduce \(A^{\acc}_{\mathcal{Q},\mu}\) on long-horizon tasks once decisive evidence falls outside the window, even when short-horizon apertures remain high.
   \item \textbf{Epistemic breadth.} The epistemic layer is minimal scaffolding, not a full theory of noisy, adversarial, or social observers.
   \item \textbf{Computability and estimation.} Finite witnesses are exactly computable; large-scale settings require model choices for \(\mu_{\mathcal{Q}},\nu,\nu_{\mathcal{Q}}\) and typically require approximate optimization for decoder classes.
   \item \textbf{Example regime.} Witnesses are finite and explicit by design; broader categorical, asymptotic, and systems instantiations are future work.
